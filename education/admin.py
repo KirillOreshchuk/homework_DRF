@@ -1,3 +1,13 @@
 from django.contrib import admin
 
-# Register your models here.
+from education.models import Course, Lesson
+
+
+@admin.register(Course)
+class CourseAdmin(admin.ModelAdmin):
+    list_display = ('name', 'description', 'preview')
+
+
+@admin.register(Lesson)
+class LessonAdmin(admin.ModelAdmin):
+    list_display = ('name', 'description', 'preview', 'video_url', 'course')
