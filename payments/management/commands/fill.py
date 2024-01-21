@@ -17,8 +17,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
 
-        # Удаляем все объекты классов User, Payment, Lesson, Course
-        User.objects.all().delete()
+        # Удаляем все объекты классов Payment, Lesson, Course
         Payment.objects.all().delete()
         Lesson.objects.all().delete()
         Course.objects.all().delete()
