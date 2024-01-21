@@ -11,11 +11,11 @@ app_name = EducationConfig.name
 
 
 urlpatterns = [
-    path('', LessonListView.as_view()),
-    path('create/', LessonCreateView.as_view()),
-    path('<int:pk>/', LessonDetailView.as_view()),
-    path('<int:pk>/update/', LessonUpdateView.as_view()),
-    path('<int:pk>/delete/', LessonDeleteView.as_view()),
+    path('', LessonListView.as_view(), name='lesson-list'),
+    path('create/', LessonCreateView.as_view(), name='lesson-create'),
+    path('<int:pk>/', LessonDetailView.as_view(), name='lesson-detail'),
+    path('update/<int:pk>/', LessonUpdateView.as_view(), name='lesson-update'),
+    path('delete/<int:pk>/', LessonDeleteView.as_view(), name='lesson-delete'),
 ]
 
 router = routers.SimpleRouter()
