@@ -23,6 +23,9 @@ class Lesson(models.Model):
     preview = models.ImageField(upload_to='education/', **NULLABLE, verbose_name='Фото')
     video_url = models.CharField(max_length=200, **NULLABLE, verbose_name='Ссылка на видео')
 
+    course = models.ForeignKey('education.Course', on_delete=models.SET_NULL, null=True,
+                               verbose_name='Курс', related_name='lessons')
+
     class Meta:
         verbose_name = 'Урок'
         verbose_name_plural = 'Урок'
@@ -30,4 +33,6 @@ class Lesson(models.Model):
 
     def __str__(self):
         return self.name
+
+
     
