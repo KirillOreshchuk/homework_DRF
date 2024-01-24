@@ -28,7 +28,7 @@ class Command(BaseCommand):
             email = fake.email()
             password = fake.password()
             phone = fake.numerify()
-            city = fake.country()
+            city = fake.city()
             user = User.objects.create(email=email, password=password, phone=phone, city=city)
             users.append(user)
 
