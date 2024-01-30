@@ -12,7 +12,7 @@ class Course(models.Model):
     class Meta:
         verbose_name = 'Курс'
         verbose_name_plural = 'Курсы'
-        ordering = ['name', ]
+        ordering = ['name',]
 
     def __str__(self):
         return self.name
