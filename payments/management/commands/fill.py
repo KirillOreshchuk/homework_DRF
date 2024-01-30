@@ -22,9 +22,9 @@ class Command(BaseCommand):
         Lesson.objects.all().delete()
         Course.objects.all().delete()
 
-        # Создаем 5 пользователей
+        # Создаем 3 пользователя
         users = []
-        for i in range(5):
+        for i in range(3):
             email = fake.email()
             password = fake.password()
             phone = fake.numerify()
@@ -32,24 +32,26 @@ class Command(BaseCommand):
             user = User.objects.create(email=email, password=password, phone=phone, city=city)
             users.append(user)
 
-        # Создаем 5 курсов по 3 урока в каждом
-        courses = []
-        lessons = []
-        for i in range(5):
-            course = Course.objects.create(
-                name=fake.word(),
-                description=fake.text(),
-            )
-            courses.append(course)
-
-            for i in range(3):
-                lesson = Lesson.objects.create(
-                    name=fake.sentence(),
+            # Создаем 2 курса у каждого пользователя по 3 урока в каждом
+            courses = []
+            lessons = []
+            for i in range(2):
+                course = Course.objects.create(
+                    name=fake.word(),
                     description=fake.text(),
-                    course=course,
-                    video_url=fake.url(),
+                    owner=user,
                 )
-                lessons.append(lesson)
+                courses.append(course)
+
+                for i in range(3):
+                    lesson = Lesson.objects.create(
+                        name=fake.sentence(),
+                        description=fake.text(),
+                        course=course,
+                        video_url=fake.url(),
+                        owner=user,
+                    )
+                    lessons.append(lesson)
 
         # Создаем 20 рандомных платежей
         for i in range(20):
