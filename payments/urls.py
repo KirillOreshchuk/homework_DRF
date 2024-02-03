@@ -2,15 +2,16 @@ from django.urls import path
 
 from payments.apps import PaymentsConfig
 from payments.views import (PaymentListAPIView, PaymentCreateAPIView, PaymentDetailAPIView,
-                            PaymentUpdateAPIView, PaymentDeleteAPIView)
+                            PaymentUpdateAPIView, PaymentDeleteAPIView, GetPaymentView)
 
 app_name = PaymentsConfig.name
 
 
 urlpatterns = [
-    path('payment/', PaymentListAPIView.as_view(), name='payment-list'),
-    path('payment/create/', PaymentCreateAPIView.as_view(), name='payment-create'),
-    path('payment/<int:pk>/', PaymentDetailAPIView.as_view(), name='payment-detail'),
-    path('payment/update/<int:pk>/', PaymentUpdateAPIView.as_view(), name='payment-update'),
-    path('payment/delete/<int:pk>/', PaymentDeleteAPIView.as_view(), name='payment-delete'),
+    path('', PaymentListAPIView.as_view(), name='payment-list'),
+    path('create/', PaymentCreateAPIView.as_view(), name='payment-create'),
+    path('<int:pk>/', PaymentDetailAPIView.as_view(), name='payment-detail'),
+    path('get/<str:payment_id>/', GetPaymentView.as_view(), name='payment-get'),
+    path('update/<int:pk>/', PaymentUpdateAPIView.as_view(), name='payment-update'),
+    path('delete/<int:pk>/', PaymentDeleteAPIView.as_view(), name='payment-delete'),
 ]
