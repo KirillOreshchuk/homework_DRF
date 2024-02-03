@@ -21,6 +21,8 @@ class Payment(models.Model):
     payment_amount = models.DecimalField(max_digits=10, decimal_places=1, verbose_name='Сумма оплаты')
     payment_method = models.CharField(max_length=10, choices=METHOD_CHOICES,
                                       default='card', verbose_name='Способ оплаты')
+    session = models.CharField(max_length=400, unique=True, **NULLABLE, verbose_name='Текущая сессия оплаты')
+    is_paid = models.BooleanField(default=False, verbose_name='Статус оплаты')
 
     class Meta:
         verbose_name = 'Платеж'
