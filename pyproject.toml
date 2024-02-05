@@ -17,6 +17,11 @@ coverage = "^7.4.1"
 postgres = "^4.0"
 drf-yasg = "^1.21.7"
 stripe = "^8.1.0"
+redis = "^5.0.1"
+celery = "^5.3.6"
+django-celery-beat = "2.1.0"
+python-dotenv = "^1.0.1"
+cors = "^1.0.1"
 
 [tool.poetry.dev-dependencies]
 

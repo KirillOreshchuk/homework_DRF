@@ -1,10 +1,12 @@
+from rest_framework import generics
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
 
 from education.models import Course
 from education.paginators import CoursePaginator
 from education.permissions import IsOwner, IsMember, IsModerator
-from education.serializers.course import CourseListSerializer
+from education.serializers.course import CourseListSerializer, CourseSerializer
+from education.tasks import update_course
 
 
 class CourseViewSet(ModelViewSet):
@@ -23,7 +25,16 @@ class CourseViewSet(ModelViewSet):
         elif self.action == 'list':
             permission_classes = [IsAuthenticated, IsModerator | IsMember]
         elif self.action == 'retrieve' or self.action == 'update':
-            permission_classes = [IsAuthenticated, IsOwner | IsModerator]
+            permission_classes = [IsAuthenticated]
         elif self.action == 'destroy':
             permission_classes = [IsAuthenticated, IsOwner]
         return [permission() for permission in permission_classes]
+
+
+class CourseUpdateAPIview(generics.UpdateAPIView):
+    serializer_class = CourseSerializer
+    queryset = Course.objects.all()
+
+    def perform_update(self, serializer):
+        description = serializer.save()
+        update_course.delay()
