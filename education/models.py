@@ -26,6 +26,7 @@ class Lesson(models.Model):
 
     course = models.ForeignKey('education.Course', on_delete=models.SET_NULL, null=True,
                                verbose_name='Курс', related_name='lessons')
+    update = models.TextField(verbose_name="обновление", default="Новые материалы курса")
     owner = models.ForeignKey('users.User', on_delete=models.CASCADE, null=True, verbose_name='Владелец')
 
     class Meta:
