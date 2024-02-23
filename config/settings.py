@@ -13,10 +13,13 @@ import os
 import datetime
 from pathlib import Path
 
+from dotenv import load_dotenv
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+load_dotenv(BASE_DIR / '.env')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -27,7 +30,7 @@ SECRET_KEY = 'django-insecure-isx&g4h3n7%ryam2sxj(h1v%wy%4jc6avp!md(ekgbumqxw0&e
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0.0.0.0',]
 
 
 # Application definition
@@ -89,9 +92,10 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'homework_drf',
-        'USER': 'postgres',
-        'PASSWORD': "1432",
+        'NAME': os.getenv('POSTGRES_DB'),
+        'USER': os.getenv('POSTGRES_USER'),
+        'PASSWORD': 'mysecretpassword',
+        'HOST': 'db',
     }
 }
 
@@ -145,9 +149,10 @@ REST_FRAMEWORK = {
     )
 }
 
+
 STRIPE_API_KEY = os.getenv('STRIPE_API_KEY')
 
-CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_BROKER_URL = 'redis://redis:6379/0'
 CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 CELERY_TIMEZONE = 'UTC'
 CELERY_TASK_TRACK_STARTED = True

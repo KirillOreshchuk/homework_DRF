@@ -6,7 +6,7 @@ authors = ["KirillOreshchuk <oreshchuk.kirill@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-django = "^5.0.1"
+django = "4.2.7"
 djangorestframework = "^3.14.0"
 pillow = "^10.2.0"
 psycopg2-binary = "^2.9.9"
@@ -19,9 +19,10 @@ drf-yasg = "^1.21.7"
 stripe = "^8.1.0"
 redis = "^5.0.1"
 celery = "^5.3.6"
-django-celery-beat = "2.1.0"
 python-dotenv = "^1.0.1"
 cors = "^1.0.1"
+django-celery-beat = "^2.5.0"
+docker = "^7.0.0"
 
 [tool.poetry.dev-dependencies]
 
